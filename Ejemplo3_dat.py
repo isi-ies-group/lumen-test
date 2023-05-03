@@ -5,8 +5,8 @@ import pandas as pd
 
 
 # Válido para introducir tanto csv como txt.
-datos = pd.read_csv(r'C:\Users\David\OneDrive - Universidad Politécnica de Madrid\IES\Archivos_Spyder\ficheros\summaryRR_comprados.dat', delimiter='	', encoding='latin1')
-datos.to_csv(r'C:\Users\David\OneDrive - Universidad Politécnica de Madrid\IES\Archivos_Spyder\ficheros\datosAutoMod.csv')
+datos = pd.read_csv('ficheros/summaryRR_comprados.dat', delimiter='	', encoding='latin1')
+datos.to_csv('ficheros/datosAutoMod.csv')
     
 
 pn.extension('tabulator')
