@@ -6,7 +6,7 @@
 
 # Para la EJECUCIÓN, desde la terminal nos dirigimos al directorio
 # que contiene el archivo .py y ejecutamos el siguiente comando: 
-#   lumen serve Ejemplo_V1.py --show 
+#   lumen serve Ejemplo_V1.py --show -autoreload
 
 
 import lumen as lm
@@ -15,7 +15,7 @@ import pandas as pd
 
 
 # Ruta del fichero de origen
-datos = pd.read_csv('ficheros/tracker.csv', delimiter=',', encoding='latin1')
+datos = pd.read_csv('ficheros/tracker_TiempoReal.csv', delimiter=',', encoding='latin1')
 
 # Ruta donde se creará el nuevo fichero
 datos.to_csv('ficheros/datosAutoMod.csv')
@@ -46,6 +46,7 @@ pipeline = lm.Pipeline.from_spec(
 pipeline
 
 
+
 # ******************* REPRESENTACIÓN GRÁFICA **********************************
 """ SCATTER: dibujar gráficas
     pipeline = input de datos 
@@ -56,12 +57,13 @@ pipeline
     height = altura del imagen del gráfico (no el máximo de datos)
     responsive = True (con True se ajusta al máximo de ventana)
 """
-
+"""
 scatter = lm.views.hvPlotView(
     pipeline=pipeline, kind='scatter', x='created_at', y='irr_sup',
     height=400, responsive=True
 )
 scatter
+"""
 
 # ********************************* TABLA *************************************
 """ TABLE: dibujar tablas
@@ -69,37 +71,42 @@ scatter
     page_size = total de filas a mostrar
     sizing_mode = 
 """
-
+"""
 table = lm.views.Table(pipeline=pipeline, page_size=40, sizing_mode='stretch_width')
 table
+"""
 
 
 # ****************************** LAYOUT ***************************************
 """ LAYOUT: mostrar varias elementos de forma conjunta en una página
     En este caso, mostramos el scatter y la tabla, con el título de 'Tracker'
 """
-
+"""
 layout = lm.Layout(views={'scatter': scatter, 'table': table}, title='Tracker')
 layout
+"""
 
 
 # ****************************** LAYOUT ***************************************
 """ DASHBOARD: creación del dash al completo (incluye los filtros del pipeline)
     Introducimos el título que queramos y el layout definido anteriormente
 """  
-
+"""
 dash = lm.Dashboard(config={'title': 'Tracker'}, layouts=[layout])
 dash
+"""
 
 
 # .servable() , necesario para poder visualizar los elementos
 
-"""
+
 pipeline.servable()
+"""
 scatter.servable()
 table.servable()
 layout.servable()
-"""
+
 
 dash.servable()
+"""
 
