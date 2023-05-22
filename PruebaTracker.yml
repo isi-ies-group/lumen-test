@@ -1,0 +1,32 @@
+config: 
+    title: "DEMO VERSION"
+    theme: dark
+
+
+sources:
+  tracker_source: 
+    type: intake
+    catalog:
+      sources:     
+        driver: textfiles
+        args:
+          urlpath: C:/Users/David/Documents/GitHub/lumen-test/ficheros/meteo.txt
+
+
+pipelines: 
+  tracker_izq_pipeline:
+    source: tracker_source
+    filters: 
+      - type: widget
+        field: irr_izq
+
+
+layouts: 
+  - title: GRAFICA IZQUIERDA
+    pipeline: tracker_izq_pipeline
+    views: 
+      - type: hvplot
+        kind: scatter
+        y: irr_izq
+      - type: table
+        

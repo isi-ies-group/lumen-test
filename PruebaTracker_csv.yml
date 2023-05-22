@@ -1,0 +1,50 @@
+config: 
+    title: "DEMO VERSION"
+    theme: dark
+
+sources:
+  tracker_source:
+    type: file
+    tables:
+      tracker_table: C:/Users/David/Documents/GitHub/lumen-test/ficheros/tracker.csv
+
+pipelines: 
+  tracker_izq_pipeline:
+    source: tracker_source
+    table: tracker_table
+    filters: 
+      - type: widget
+        field: irr_izq
+        
+  tracker_fro_pipeline:
+    source: tracker_source
+    table: tracker_table
+    filters: 
+      - type: widget
+        field: irr_fro
+
+layouts: 
+  - title: GRAFICA IZQUIERDA
+    pipeline: tracker_izq_pipeline
+    views: 
+      - type: hvplot
+        table: tracker_table
+        kind: scatter
+        y: irr_izq
+      - type: table
+        
+  - title: GRAFICA FRONTAL
+    pipeline: tracker_fro_pipeline
+    views: 
+      - type: hvplot
+        table: tracker_table
+        kind: scatter
+        y: irr_fro
+        
+  - title: TABLA
+    source: tracker_source
+    views: 
+      - type: table
+        table: tracker_table
+        y: irr_der
+        
