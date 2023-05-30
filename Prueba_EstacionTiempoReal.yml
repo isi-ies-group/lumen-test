@@ -1,0 +1,28 @@
+sources:
+  tracker_source:
+    type: file
+    tables:
+      tracker_table: ficheros/estacion_TiempoReal.csv
+
+#pipelines: 
+#    tracker_pipeline: 
+#      source: tracker_source
+#      table: tracker_table
+      #filters: 
+      #  - type: widget
+      #    field: irr_sup               #filtramos por irradiancias superiores
+
+
+layouts:
+  - title: Tracker
+    source: tracker_source
+    views:
+      - type: table
+        table: tracker_table
+      - type: hvplot
+        table: tracker_table
+      - type: hvplot
+        table: tracker_table
+        kind: scatter                   # mapa de puntos
+        
+        
