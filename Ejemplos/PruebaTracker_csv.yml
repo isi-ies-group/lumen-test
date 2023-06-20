@@ -6,7 +6,7 @@ sources:
   tracker_source:
     type: file
     tables:
-      tracker_table: C:/Users/David/Documents/GitHub/lumen-test/ficheros/tracker.csv
+      tracker_table: ficheros/tracker.csv
 
 pipelines: 
   tracker_izq_pipeline:

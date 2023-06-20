@@ -15,7 +15,7 @@ import pandas as pd
 
 
 # Ruta del fichero de origen
-datos = pd.read_csv('ficheros/tracker_TiempoReal.csv', delimiter=',', encoding='latin1')
+datos = pd.read_csv('C:/Users/David/Documents/GitHub/lumen-test/Ejemplos/ficheros/tracker.csv', delimiter=',', encoding='latin1')
 
 # Ruta donde se creará el nuevo fichero
 datos.to_csv('ficheros/datosAutoMod.csv')
