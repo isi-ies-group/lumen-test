@@ -1,0 +1,26 @@
+sources:
+  simple:
+    driver: streamz #intake_streamz.source.StreamzSource
+    args:
+      method_chain:
+        - method: from_iterable
+          kwargs:
+            iterable: [1, 2, 3]
+  df:
+    driver: streamz #intake_streamz.source.StreamzSource
+    args:
+      method_chain:
+        - method: from_periodic
+          kwargs:
+            callback: streamz.dataframe.core.random_datapoint
+          interval: '30s' # no está claro que lo lea, se traga cualquier cosa
+          func_value: ["callback"]
+        - method: to_dataframe
+          kwargs:
+            example: streamz.dataframe.core.random_datapoint
+            #pp.mem_data
+          func_value: ["example"]
+    metadata:
+      plots:
+        myscatter:
+          kind: scatter
