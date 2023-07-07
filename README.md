@@ -18,7 +18,7 @@ En la sección '[source](https://lumen.holoviz.org/reference/index.html)' se mue
  
 
 Se han explorado las opciones de 'FileSource' para importar de manera directa los archivos 'csv' y, mediante una pequeña conversión, ficheros de tipo txt y dat ( mediante Python). 
-Se ha tratado de hacer uso de la libreria 'intake' utilizando Python sin éxito. Para utilizar esta libreria con YAML hay númerosos [ejemplos](https://lumen.holoviz.org/gallery/precip.html) en el repositorio de Lumen. 
+Se ha tratado de hacer uso de la libreria 'intake' utilizando Python sin éxito. Para utilizar esta libreria con YAML hay númerosos [ejemplos](https://lumen.holoviz.org/gallery/index.html) en el repositorio de Lumen. 
 
 
 ## Mostrar gráficas 
@@ -33,7 +33,7 @@ Para ver más opciones y consultar los argumentos de cada una de las funciones, 
 Proporciona una representación visual de los datos.
 Más información en la [ayuda](https://lumen.holoviz.org/reference/view/Panel.html).
 
-[Ejemplo básico](Ejemplos/ej_panel_stramz.py) en Python. 
+[Ejemplo básico](Ejemplos/Python/ej_panel_streamz.py) en Python. 
 
 ## INTAKE 
 Aumenta el rango de capacidades a la hora de importar ficheros de distintos tipos. 
@@ -42,7 +42,7 @@ En el [enlace](https://intake.readthedocs.io/en/latest/plugin-directory.html) se
 
 [Ayuda](https://lumen.holoviz.org/reference/source/IntakeSource.html) y [ejemplos](https://lumen.holoviz.org/gallery/precip.html) disponibles en GitHub.
 
-Disponibles ejemplos básicos en el repositorio, empleando [Python](Ejemplos/Python/ej_intake_basico.py) y [Yaml](Ejemplos/Yaml/ej_intake_catalog) junto con 'catalog'. 
+Disponibles ejemplos básicos en el repositorio, empleando [Python](Ejemplos/Python/ej_intake_basico.py) y [Yaml](Ejemplos/Yaml/ej_intake_catalog.yaml) junto con 'catalog'. 
 
   
 ## STREAMZ 
