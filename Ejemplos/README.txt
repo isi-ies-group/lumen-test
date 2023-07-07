@@ -1,8 +1,4 @@
-Este directorio contiene dos ejemplos de utilización de la herramienta Lumen. 
-Uno de ellos ha sido desarrollado en "yaml" y el segundo en "python", en cualquier
-caso, ambos son completamente válidos. 
-
-Para su ejecución, seguir los siguientes pasos: 
+Para la ejecución del código, seguir los siguientes pasos: 
 	1 - En la terminal, dirigirse al directorio que contenga el fichero con el código
 	2 - Lanzar el código mediante el comando: 
 		" lumen serve nombreDelFichero.extension --show "
