@@ -1,5 +1,5 @@
 import intake
-cat = intake.open_catalog("catalog_intake.yaml")
+cat = intake.open_catalog("ej_intake_catalog.yaml")
 # this is a simple iterator which will pass the values 1, 2, 3
 # with no control. We choose to print each value as it arrives
 # s0 = cat.simple.read()
