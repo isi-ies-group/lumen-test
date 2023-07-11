@@ -1,28 +1,91 @@
-sources:
-  tracker_source:
-    type: file
-    tables:
-      tracker_table: ficheros/estacion_TiempoReal.csv
+####################################################################################################################################
+#
+#   Para ejecutar el código y que se actualice junto al fichero fuente, dirigirse al directorio donde esta contenido y ejecutar: "lumen serve miprograma.yml --show"
+#   Para ejecutar el código y ver los cambios a medida que lo contruimos, ejecutarlo con "lumen serve miprograma.yml --show --autoreload"
+#   Para ejecutar el código y que sea accesible desde otros dispositivos de la red: "lumen serve miprograma.yml --show --allow-websocket-origin=138.4.46.*:5006"
+#
+#   NOTAS: 
+#    - Las gráficas son dinámicas, se pueden desplazar o seleccionar zonas donde se quiera hacer zoom
+#    - Situando el cursor sobre un punto de la gráfica, esta da los valores concretos
+#
+#####################################################################################################################################
 
-#pipelines: 
-#    tracker_pipeline: 
-#      source: tracker_source
-#      table: tracker_table
-      #filters: 
-      #  - type: widget
-      #    field: irr_sup               #filtramos por irradiancias superiores
+
+# Configuración general del dash
+
+config: 
+  title: Estacion Meteo - IES       # Nombre del dash
+  theme: dark                       # Color del dash (por defecto es claro)
+  layout: tabs                      # Organiza los `layouts' en distintas pestañas (por defecto todos en la misma pestaña)
+
+
+# Declaración de las fuentes de datos
+
+sources:                                        
+  tracker_source:
+    type: file                              
+    tables:
+      tracker_table: estacion_TiempoReal.csv    # Ruta relativa o absluta al fichero de datos
+    kwargs: 
+      parse_dates: [Fecha]                      # Permite seleccionar el rango de fechas a mostrar mediante el filtro "Fecha"
+
+
+# Declaración de los pipelines. Podemos crear tantos pipelibes como queramos, cada uno con sus propios filtros
+pipelines:                              
+  pip1_pipeline:                        # Nombre del pipeline que queremos crear
+    source: tracker_source              # Fuente de donde coge los datos
+    filters:                            # Introducimos los filtros que queremos que contenga el pipeline en concreto junto a la variable a filtrar  
+      - type: widget                    # Tipo del filtro
+        field: Celula Top               # Campo que queremos filtrar
+      - type: widget
+        field: Celula Mid
+        
+  pip2_pipeline: 
+    source: tracker_source
+    filters:       
+        - type: widget
+          field: Fecha 
+        - type: widget
+          field: Bateria
 
 
 layouts:
-  - title: Tracker
-    source: tracker_source
-    views:
-      - type: table
+  # PRIMERA PESTAÑA
+  - title: Graficas                     # Nombre de la pestaña
+    pipeline: pip1_pipeline             # Pipeline de donde obtenemos los datos junto a los filtros
+    #source: tracker_source             # Se puede crear la gráfica directamente de la fuente en el caso de no querer filtros
+    views:                              # Definimos todas las gráficas que queramos
+      Grafica1: 
+        type: hvplot
+        kind: points                    # Tipo de gráfica
+        x: Fecha                        # Datos y etiquetas en 'x'
+        y: PIRAN.1                      # Datos y etiqueta en 'y'
+        color: Temp. Ai 1               # Color en función de la variable 'temperatura'
+        responsive: true                # true para que se ajuste al tamaño de la ventana
+        height: 500                     # Altura de la gráfica
+      Grafica2:         
+        type: hvplot
+        table: tracker_table            # Graficamos todos los campos de la tabla o fuente
+        responsive: true
+        height: 350
+      Grafica3:         
+        type: hvplot
         table: tracker_table
-      - type: hvplot
-        table: tracker_table
-      - type: hvplot
-        table: tracker_table
-        kind: scatter                   # mapa de puntos
-        
-        
+        kind: hist                      # Diagrama de barras
+        x: Fecha
+        y: Celula Top
+        responsive: true 
+        height: 350 
+      Boton: 
+        type: download                   # Genera un botón para descargar los datos graficados
+        filename: datosMeteoDash        # Nombre del fichero a descargar 
+        format: 'csv'                    # Formato del fichero
+    layout: [[Boton],[Grafica1],[Grafica2, Grafica3]]   # Organización de las gráficas en el dash (forma matricial)
+    
+  # SEGUNDA PESTAÑA
+  - title: Tablas
+    pipeline: pip2_pipeline
+    views:                      
+        # Podemos definir las distintas graficas o tablas de la pestaña sin necesidad de darles un nombre
+        - type: table                   # Pinchando en las flechas de cada cabecera ordena en función de ese parámetro
+          table: tracker_table        
